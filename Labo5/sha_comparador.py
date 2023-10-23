@@ -37,7 +37,7 @@ if len(lines) == len(enlineas)+1:
 		else:
 			print("False: prefijo de tamaño diferente")
 			sys.exit(0)
-		if len(ultima_linea2[1]) != 4 or not ultima_linea2[1].isalpha():
+		if len(ultima_linea2[1]) != 2 or not ultima_linea2[1].isalpha():
 			print("False: identificador incorrecto")
 			sys.exit(0)
 		if ultima_linea2[2] != "100":
