@@ -1,3 +1,3 @@
-# SGSSI_Ariketa3
-SGSSI klaseko ariketa baten ebazpena
+# SGSSI_Repositorio
+SGSSIko ariketen errepositorioa
 
