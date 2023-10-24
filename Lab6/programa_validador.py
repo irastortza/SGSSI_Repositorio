@@ -71,7 +71,11 @@ try:
        elif comp == -1:
            print("Error al abrir el fichero: " + path)
     
-    maximo_ceros = max(ceros.values())
+    try:
+    	maximo_ceros = max(ceros.values())
+    except ValueError:
+    	print("La carpeta está vacia o no tiene ficheros válidos")
+    	sys.exit(1)
     empatados = [k for k, v in ceros.items() if v == maximo_ceros]
 
     print("Ficheros que cumplen las condiciones: ")
