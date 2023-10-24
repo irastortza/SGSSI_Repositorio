@@ -87,8 +87,11 @@ try:
     print("Ficheros que cumplen las condiciones: ")
     for i in ceros.keys(): 
         print(i)
-
-    elegido, cuantos_ceros=sorteo(ceros)
+    try:
+    	elegido, cuantos_ceros=sorteo(ceros)
+    except UnboundLocalError:
+    	print("La carpeta está vacia o no tiene ficheros válidos")
+    	sys.exit(1)
     print ("\tElegido: " + elegido + "\n\tNúnemro de ceros: " + str(cuantos_ceros))
 
 except FileNotFoundError:
