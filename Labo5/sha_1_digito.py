@@ -13,7 +13,7 @@ if documento[0] == '.':
 sha= "1"
 while sha[0] != "0":
     prefijo = os.urandom(4).hex()
-    texto = enbytes.decode('utf-8') + str(prefijo) + "\tXIRA\t100"
+    texto = enbytes.decode('utf-8') + str(prefijo) + "\31\t100"
     sha = hashlib.sha256(texto.encode('utf-8')).hexdigest()
 
 with open (nombre,"w", newline='') as f2:
