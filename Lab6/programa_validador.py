@@ -1,17 +1,18 @@
 import hashlib
 import sys
 import os
+import string
 
 
 def comparador (documento,documento2):
     try:
-        with open (documento,"rb") as f:
+        with open (documento,"r") as f:
             enlineas = f.readlines()
         with open(documento2,"rb") as f:
             enbytes = f.read()
             sha2 = hashlib.sha256(enbytes).hexdigest()
         
-        segundoDoc = open(documento2,"rb")
+        segundoDoc = open(documento2,"r")
         lines = segundoDoc.readlines()
         segundoDoc.close()
     except:
@@ -19,9 +20,9 @@ def comparador (documento,documento2):
 
     if len(lines) == len(enlineas)+1:
         for i in range(len(enlineas)-1):
-            if lines[i].decode('utf-8') != enlineas[i].decode('utf-8'):
+            if lines[i] != enlineas[i]:
                 return -2, None
-        ultima_linea2=lines[-1].decode('utf-8').split("\t")
+        ultima_linea2=lines[-1].split("\t")
         if len(ultima_linea2) == 3:
             if len(ultima_linea2[0]) == 8:
                 try:
@@ -30,7 +31,7 @@ def comparador (documento,documento2):
                     return -2, None
             else:
                 return -2, None
-            if len(ultima_linea2[1]) != 2 or not ultima_linea2[1].isalpha():
+            if len(ultima_linea2[1]) != 2 or not all(c in string.hexdigits for c in ultima_linea2[1]):
                 return -2, None
             if ultima_linea2[2] != "100":
                 return -2, None
@@ -46,7 +47,7 @@ def comparador (documento,documento2):
 def cuentaceros (sha):
     kont=0
     for i in sha:
-        if sha == '0':
+        if i == '0':
             kont+=1
         else:
             break
@@ -72,10 +73,10 @@ try:
            print("Error al abrir el fichero: " + path)
     
     try:
-    	maximo_ceros = max(ceros.values())
+        maximo_ceros = max(ceros.values())
     except ValueError:
-    	print("La carpeta está vacia o no tiene ficheros válidos")
-    	sys.exit(1)
+        print("La carpeta está vacia o no tiene ficheros válidos")
+        sys.exit(1)
     empatados = [k for k, v in ceros.items() if v == maximo_ceros]
 
     print("Ficheros que cumplen las condiciones: ")
@@ -83,7 +84,7 @@ try:
         print(i)
 
     if len(empatados) >= 1:
-        print ("\tElegido: " + empatados[0])
+        print ("\tElegido: " + empatados[0] + "\t Número de ceros: " + str(maximo_ceros))
     else:
         print("No se ha podido elegir ningun fichero.")
 
